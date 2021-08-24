@@ -23,15 +23,15 @@
             methods:{
                 //button을 클릭했을 때 생기는 이벤트를 정의한 함수
                 passEvent: function(){
-                    //vue에서 제공하는 api : $emit
-                    //pass는 이벤트 이름
+                    // $emit: vue에서 제공하는 api
+                    //이벤트 이름: pass
                     this.$emit('pass');
                 }
             }
         }
 
         var appContent = {
-            //v-on은 vue에서 제공하는 속성
+            //v-on: vue에서 제공하는 속성
             template: '<button v-on:click="addNumber">add</button>',
             methods:{
                 addNumber: function(){
@@ -40,7 +40,7 @@
             }
         }
 
-        new Vue({
+        var vm = new Vue({
             el:'#app',
             components:{
                 'app-header': appHeader,
