@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{ num }}</p>
+        <!-- <app-header v-on:하위 컴포넌트에서 발생한 이름="상위 컴포넌트의 메서드 이름"></app-header> -->
+        <!-- 하위 컴포넌트에서 pass라는 이벤트가 왔을때 상위 컴포넌트 태그에서 받아서 logText라는 메서드가 실행된다.-->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:increase="increaseNumber"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var appHeader = {
+            // 클릭 이벤트 v-on:click
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods:{
+                //button을 클릭했을 때 생기는 이벤트를 정의한 함수
+                passEvent: function(){
+                    //vue에서 제공하는 api : $emit
+                    //pass는 이벤트 이름
+                    this.$emit('pass');
+                }
+            }
+        }
+
+        var appContent = {
+            //v-on은 vue에서 제공하는 속성
+            template: '<button v-on:click="addNumber">add</button>',
+            methods:{
+                addNumber: function(){
+                    this.$emit('increase')
+                }
+            }
+        }
+
+        new Vue({
+            el:'#app',
+            components:{
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods:{
+                logText: function(){
+                    console.log('hi');
+                },
+                increaseNumber: function(){
+                    //this는 해당 객체를 말한다. 
+                    //num을 this로 받을 수 있는 이유는 vue 내부의 동작에 의해서 data안의 num이 밖으로 나와있기 때문
+                    this.num = this.num + 1;
+                }
+
+            },
+            data:{
+                num: 10
+            }
+        });
+    </script>
+</body>
+</html>

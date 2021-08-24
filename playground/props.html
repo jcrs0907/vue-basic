@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- props의 문법 -->
+        <!-- <app-header v-bind:프롭스 속성 이름="상위 컴포넌트의 데이터 이름"></app-header> -->
+        <!-- 상위 컴포넌트의 속성(message)이  하위 컴포넌트로 내려온다. -->
+        <!-- 상위 컴포넌트의 reactivity가 하위 컴포넌트에도 반영이 된다. -->
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //컴포넌트를 별도의 변수(카멜케이스)로 빼서 객체 생성
+        var appHeader = {
+            template: '<h1>{{ propsdata }}</h1>',
+            props:['propsdata']
+        }
+
+        var appContent = {
+            template: '<div>{{ propsdata }}</div>',
+            props: ['propsdata']
+        }
+
+        new Vue({
+            el: '#app',
+            components:{
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            data:{
+                message: 'hi',
+                num: 10
+            }
+        });
+    </script>
+</body>
+</html>
