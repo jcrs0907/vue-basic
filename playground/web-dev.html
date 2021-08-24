@@ -1,0 +1,33 @@
+<!-- ! + tab html5기본 구성 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- html은 화면에 나타나는 DOM의 정보를 담고 있다.-->
+    <div id="app">
+    </div>
+    <!-- javascript는 해당 tag나 DOM의 내용을 조작할 수 있다. -->
+    <script>
+        var div = document.querySelector('#app');
+
+        //문자열을 바로 연결할 경우
+        //div.innerHTML = 'hello world';
+
+        //문자열을 변수에 담아 변수끼리 연결하는 것이 좋다.
+        var str = 'hello world';
+        div.innerHTML = str;
+
+        //변수의 값을 변경해도 div의 내용이 변경되지 않는다.
+        str = 'hello world!!!';
+
+        //div의 내용을 변경하려면 innerHTML을 한번 더 실행해야 한다.
+        //=>기존 웹 개발 방식(HTML, Javascript)
+         div.innerHTML = str;
+    </script>
+</body>
+</html>
