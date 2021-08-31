@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <app-header v-bind:propsdata="num"></app-header>
+    <!-- cmd + d 대상 선택 -> 같은 내용을 확인할 수 있다. -->
+    <app-content v-on:pass="deliverNum"></app-content>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script>
+    var appHeader = {
+      template : '<div>header</div>',
+      props: ['propsdata']
+    }
+
+    //버튼을 클릭할 때 passNum을 실행시켜 준다.
+    var appContent = {
+      template : '<div>content<button v-on:click="passNum">pass</button></div>',
+      methods : {
+        passNum : function(){
+          //$emit을 실행시켜 pass라는 이벤트 이름과 10이라는 데이터를 넘겨준다.
+          this.$emit('pass',10);
+        }
+      }
+    }
+
+    new Vue({
+      el : "#app",
+      components : {
+        'app-header': appHeader,
+        'app-content': appContent
+      },
+      data : {
+        num : 0
+      },
+      methods:{
+        deliverNum : function(value){
+          this.value = value;
+        }
+      }
+    });
+  </script>
+</body>
+</html>
